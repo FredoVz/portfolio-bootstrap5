@@ -5,26 +5,28 @@ const btnKirim = document.querySelector(".btn-kirim");
 const btnLoading = document.querySelector(".btn-loading");
 const myAlert = document.querySelector(".my-alert");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  //Ketika tombol submit diklik
-  //tampilkan tombol loading, hilangkan tombol kirim
-  btnLoading.classList.toggle("d-none");
-  btnKirim.classList.toggle("d-none");
-  fetch(scriptURL, { method: "POST", body: new FormData(form) })
-    .then((response) => response.json())
-    .then((response) => {
-      //tampilkan tombol kirim, hilangkan tombol loading
-      btnLoading.classList.toggle("d-none");
-      btnKirim.classList.toggle("d-none");
-      //tampilkan alert
-      myAlert.classList.toggle("d-none");
-      //reset formnya
-      form.reset();
-      //console.log("Success!", response);
-    })
-    .catch((error) => console.error("Error!", error.message));
-});
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    //Ketika tombol submit diklik
+    //tampilkan tombol loading, hilangkan tombol kirim
+    btnLoading.classList.toggle("d-none");
+    btnKirim.classList.toggle("d-none");
+    fetch(scriptURL, { method: "POST", body: new FormData(form) })
+      .then((response) => response.json())
+      .then((response) => {
+        //tampilkan tombol kirim, hilangkan tombol loading
+        btnLoading.classList.toggle("d-none");
+        btnKirim.classList.toggle("d-none");
+        //tampilkan alert
+        myAlert.classList.toggle("d-none");
+        //reset formnya
+        form.reset();
+        //console.log("Success!", response);
+      })
+      .catch((error) => console.error("Error!", error.message));
+  });
+}
 
 const galleryImage = document.querySelectorAll(".gallery-img");
 
@@ -36,14 +38,19 @@ galleryImage.forEach((img, i) => {
 });
 
 //AOS INIT
-AOS.init({
-  once: true,
-  duration: 2000,
-});
+if (window.AOS) {
+  AOS.init({
+    once: true,
+    duration: 2000,
+  });
+  AOS.refresh();
+}
 
 //GSAP
-gsap.registerPlugin(TextPlugin);
-gsap.to(".lead", { duration: 2, delay: 1.5, text: "Programmer | Designer" });
-gsap.from(".jumbotron img", { duration: 1, rotateY: 360, opacity: 0 });
-gsap.from(".navbar", { duration: 1.5, y: "-100%", opacity: 0, ease: "bounce" });
-gsap.from(".display-4", { duration: 1, x: -50, opacity: 0, delay: 0.5, ease: "back" });
+if (window.gsap) {
+  gsap.registerPlugin(TextPlugin);
+  gsap.to(".lead", { duration: 2, delay: 1.5, text: "Programmer | Designer" });
+  gsap.from(".jumbotron img", { duration: 1, rotateY: 360, opacity: 0 });
+  gsap.from(".navbar", { duration: 1.5, y: "-100%", opacity: 0, ease: "bounce" });
+  gsap.from(".display-4", { duration: 1, x: -50, opacity: 0, delay: 0.5, ease: "back" });
+}
