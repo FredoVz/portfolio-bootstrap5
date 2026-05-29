@@ -21,7 +21,7 @@ form.addEventListener("submit", (e) => {
       myAlert.classList.toggle("d-none");
       //reset formnya
       form.reset();
-      console.log("Success!", response);
+      //console.log("Success!", response);
     })
     .catch((error) => console.error("Error!", error.message));
 });
