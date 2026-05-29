@@ -54,3 +54,12 @@ if (window.gsap) {
   gsap.from(".navbar", { duration: 1.5, y: "-100%", opacity: 0, ease: "bounce" });
   gsap.from(".display-4", { duration: 1, x: -50, opacity: 0, delay: 0.5, ease: "back" });
 }
+
+// VANILLA TILT
+if (window.VanillaTilt) {
+  VanillaTilt.init(document.querySelectorAll(".keyboard-box"), {
+    max: 35,
+    speed: 1000,
+    glare: true,
+  });
+}
